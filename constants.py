@@ -1,4 +1,4 @@
-
+# https://www.101computing.net/pong-tutorial-using-pygame-adding-a-bouncing-ball/
 
 # defining some colors
 BLACK = (0, 0, 0)
@@ -13,7 +13,7 @@ paddle_a_x = 20
 paddle_a_y = SCREEN_HEIGHT // 2
 
 # position paddle B
-paddle_b_x = SCREEN_WIDTH - 20
+paddle_b_x = SCREEN_WIDTH - 30
 paddle_b_y = SCREEN_HEIGHT // 2
 
 # line position

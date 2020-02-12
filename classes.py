@@ -1,14 +1,7 @@
 import pygame
 import constants
-from pygame.locals import (
-    K_ESCAPE,
-    K_w,
-    K_s,
-    K_UP,
-    K_DOWN,
-    KEYDOWN,
-    QUIT
-)
+
+
 class Paddle(pygame.sprite.Sprite):
     def __init__(self, color, width, height):
         super(Paddle, self).__init__()
