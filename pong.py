@@ -33,6 +33,7 @@ all_sprites.add(paddleB)
 all_sprites.add(ball)
 
 running = True
+gameover = False
 scoreA = 0
 scoreB = 0
 
@@ -57,6 +58,9 @@ while running:
 
     all_sprites.update()
 
+    if scoreA or scoreB >= 1:
+        gameover = True
+
     if ball.rect.x >= 690:
         scoreA += 1
         ball.velocity[0] = -ball.velocity[0]
@@ -70,17 +74,21 @@ while running:
 
     if pygame.sprite.collide_mask(ball, paddleA) or pygame.sprite.collide_mask(ball, paddleB):
         ball.bounce()
+    if gameover == False:
+        screen.fill(constants.BLACK)
+        pygame.draw.line(screen, constants.WHITE, constants.line_start_pos, constants.line_end_pos, constants.line_width)
 
-    screen.fill(constants.BLACK)
-    pygame.draw.line(screen, constants.WHITE, constants.line_start_pos, constants.line_end_pos, constants.line_width)
+        for entity in all_sprites:
+            screen.blit(entity.image, entity.rect)
 
-    for entity in all_sprites:
-        screen.blit(entity.image, entity.rect)
+        text_1 = classes.Text(constants.WHITE, str(scoreA), 74)
+        screen.blit(text_1.text, (250, 10))
+        text_2 = classes.Text(constants.WHITE, str(scoreB), 74)
+        screen.blit(text_2.text, (420, 10))
 
-    score1 = classes.Text(constants.WHITE, str(scoreA), 74)
-    screen.blit(score1.text, (250, 10))
-    score2 = classes.Text(constants.WHITE, str(scoreB), 74)
-    screen.blit(score2.text, (420, 10))
+    else:
+        gameover_screen = classes.Text(constants.WHITE, "Game Over!", 75)
+        screen.blit(gameover_screen.text, constants.SCREEN_WIDTH // 2, constants.SCREEN_HEIGHT // 2)
 
     pygame.display.flip()
     clock.tick(60)
