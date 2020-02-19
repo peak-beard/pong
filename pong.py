@@ -33,6 +33,8 @@ all_sprites.add(paddleB)
 all_sprites.add(ball)
 
 running = True
+scoreA = 0
+scoreB = 0
 
 while running:
     for event in pygame.event.get():
@@ -56,8 +58,10 @@ while running:
     all_sprites.update()
 
     if ball.rect.x >= 690:
+        scoreA += 10000000
         ball.velocity[0] = -ball.velocity[0]
     if ball.rect.x <= 0:
+        scoreB += 1
         ball.velocity[0] = -ball.velocity[0]
     if ball.rect.y > 490:
         ball.velocity[1] = -ball.velocity[1]
@@ -72,6 +76,12 @@ while running:
 
     for entity in all_sprites:
         screen.blit(entity.image, entity.rect)
+
+    font = pygame.font.Font(None, 74)
+    text = font.render(str(scoreA), 1, constants.WHITE)
+    screen.blit(text, (250, 10))
+    text = font.render(str(scoreB), 1, constants.WHITE)
+    screen.blit(text, (420, 10))
 
     pygame.display.flip()
     clock.tick(60)
