@@ -22,10 +22,15 @@ paddleB = classes.Paddle(constants.WHITE, 10, 100)
 paddleB.rect.x = constants.paddle_b_x
 paddleB.rect.y = constants.paddle_b_y
 
+ball = classes.Ball(constants.WHITE, 10, 10)
+ball.rect.x = constants.ball_x
+ball.rect.y = constants.ball_y
+
 all_sprites = pygame.sprite.Group()
 
 all_sprites.add(paddleA)
 all_sprites.add(paddleB)
+all_sprites.add(ball)
 
 running = True
 
@@ -49,6 +54,18 @@ while running:
         paddleB.moveDown(5)
 
     all_sprites.update()
+
+    if ball.rect.x >= 690:
+        ball.velocity[0] = -ball.velocity[0]
+    if ball.rect.x <= 0:
+        ball.velocity[0] = -ball.velocity[0]
+    if ball.rect.y > 490:
+        ball.velocity[1] = -ball.velocity[1]
+    if ball.rect.y < 0:
+        ball.velocity[1] = -ball.velocity[1]
+
+    if pygame.sprite.collide_mask(ball, paddleA) or pygame.sprite.collide_mask(ball, paddleB):
+        ball.bounce()
 
     screen.fill(constants.BLACK)
     pygame.draw.line(screen, constants.WHITE, constants.line_start_pos, constants.line_end_pos, constants.line_width)
