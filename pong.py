@@ -1,11 +1,13 @@
 import pygame
-import constants
 import classes
+import constants
 from pygame.locals import (
     K_ESCAPE,
     KEYDOWN,
     QUIT
 )
+
+
 pygame.init()
 
 screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))

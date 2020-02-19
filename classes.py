@@ -1,4 +1,5 @@
 import pygame
+from random import randint
 import constants
 
 
@@ -21,3 +22,18 @@ class Paddle(pygame.sprite.Sprite):
         self.rect.move_ip(0, pixels)
         if self.rect.bottom >= constants.SCREEN_HEIGHT:
             self.rect.bottom = constants.SCREEN_HEIGHT
+
+
+class Ball(pygame.sprite.Sprite):
+    def __init__(self, color, width, height):
+        super(Ball, self).__init__()
+
+        self.image = pygame.Surface([width, height])
+        self.image.fill(constants.BLACK)
+        self.imgae.set_colorkey(constants.BLACK)
+        self.velocity = [randint(4, 8), randint(-8, 8)]
+        self.rect = self.image.get_rect()
+
+    def update(self):
+        self.rect.x += self.velocity[0]
+        self.rect.y += self.velocity[1]
