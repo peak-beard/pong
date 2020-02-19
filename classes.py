@@ -42,3 +42,10 @@ class Ball(pygame.sprite.Sprite):
     def bounce(self):
         self.velocity[0] = -self.velocity[0]
         self.velocity[1] = randint(-8, 8)
+
+
+class Text(pygame.sprite.Sprite):
+    def __init__(self, color, text, fontsize):
+        super(Text, self).__init__()
+        self.font = pygame.font.Font(None, fontsize)
+        self.text = self.font.render(text, 1, color)

@@ -58,7 +58,7 @@ while running:
     all_sprites.update()
 
     if ball.rect.x >= 690:
-        scoreA += 10000000
+        scoreA += 1
         ball.velocity[0] = -ball.velocity[0]
     if ball.rect.x <= 0:
         scoreB += 1
@@ -77,11 +77,10 @@ while running:
     for entity in all_sprites:
         screen.blit(entity.image, entity.rect)
 
-    font = pygame.font.Font(None, 74)
-    text = font.render(str(scoreA), 1, constants.WHITE)
-    screen.blit(text, (250, 10))
-    text = font.render(str(scoreB), 1, constants.WHITE)
-    screen.blit(text, (420, 10))
+    score1 = classes.Text(constants.WHITE, str(scoreA), 74)
+    screen.blit(score1.text, (250, 10))
+    score2 = classes.Text(constants.WHITE, str(scoreB), 74)
+    screen.blit(score2.text, (420, 10))
 
     pygame.display.flip()
     clock.tick(60)
