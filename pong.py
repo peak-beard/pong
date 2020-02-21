@@ -65,15 +65,18 @@ while running:
 
     if ball.rect.x >= 690:
         scoreA += 1
+        ball.velocity[0] = -ball.velocity[0]
         ball.rect.x = constants.ball_x
         ball.rect.y = constants.ball_y
-        ball.velocity[0] = -ball.velocity[0]
+
+        time.sleep(0.25)
 
     if ball.rect.x <= 0:
         scoreB += 1
+        ball.velocity[0] = -ball.velocity[0]
         ball.rect.x = constants.ball_x
         ball.rect.y = constants.ball_y
-        ball.velocity[0] = -ball.velocity[0]
+        time.sleep(0.25)
 
     if ball.rect.y > 490:
         ball.velocity[1] = -ball.velocity[1]
