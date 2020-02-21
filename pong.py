@@ -1,6 +1,7 @@
 import pygame
 import classes
 import constants
+import time
 from pygame.locals import (
     K_ESCAPE,
     KEYDOWN,
@@ -81,14 +82,23 @@ while running:
         for entity in all_sprites:
             screen.blit(entity.image, entity.rect)
 
-        text_1 = classes.Text(constants.WHITE, str(scoreA), 74)
+        text_1 = classes.Text(constants.WHITE, str(scoreA), 74, constants.CENTER)
         screen.blit(text_1.text, (250, 10))
-        text_2 = classes.Text(constants.WHITE, str(scoreB), 74)
+        text_2 = classes.Text(constants.WHITE, str(scoreB), 74, constants.CENTER)
         screen.blit(text_2.text, (420, 10))
 
     else:
-        gameover_screen = classes.Text(constants.WHITE, "Game Over!", 75)
-        screen.blit(gameover_screen.text, constants.SCREEN_WIDTH // 2, constants.SCREEN_HEIGHT // 2)
+        screen.fill(constants.BLACK)
+        gameover_screen = classes.Text(constants.WHITE, "Game Over!", 75, constants.CENTER)
+        time.sleep(0.5)
+        screen.blit(gameover_screen.text, gameover_screen.rect)
+        if scoreB > scoreA:
+            winner = classes.Text(constants.WHITE, "Player B wins!", 45, constants.CENTER)
+            screen.blit(winner.text, winner.rect)
+        else:
+            winner = classes.Text(constants.WHITE, "Player A wins!", 45, constants.CENTER)
+            screen.blit(winner.text, winner.rect)
+
 
     pygame.display.flip()
     clock.tick(60)

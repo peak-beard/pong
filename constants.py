@@ -7,6 +7,9 @@ WHITE = (255, 255, 255)
 # screen width and height
 SCREEN_WIDTH = 700          # recommended 700
 SCREEN_HEIGHT = 500         # recommended 500
+HALF_WIDTH = SCREEN_WIDTH // 2
+HALF_HEIGHT = SCREEN_HEIGHT // 2
+CENTER = (HALF_WIDTH, HALF_HEIGHT)
 
 # position paddle A
 paddle_a_x = 20

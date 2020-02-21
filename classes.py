@@ -45,7 +45,8 @@ class Ball(pygame.sprite.Sprite):
 
 
 class Text(pygame.sprite.Sprite):
-    def __init__(self, color, text, fontsize):
+    def __init__(self, color, text, fontsize, pos):
         super(Text, self).__init__()
         self.font = pygame.font.Font(None, fontsize)
         self.text = self.font.render(text, 1, color)
+        self.rect = self.text.get_rect(center=pos)
