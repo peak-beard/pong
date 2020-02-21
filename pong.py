@@ -59,35 +59,33 @@ while running:
 
     all_sprites.update()
 
-    if scoreA or scoreB >= 1:
-        gameover = True
+    if scoreA or scoreB >= 10:
+        gameover = False
+        print("gameover")
 
     if ball.rect.x >= 690:
         scoreA += 1
+        ball.rect.x = constants.ball_x
+        ball.rect.y = constants.ball_y
         ball.velocity[0] = -ball.velocity[0]
+
     if ball.rect.x <= 0:
         scoreB += 1
+        ball.rect.x = constants.ball_x
+        ball.rect.y = constants.ball_y
         ball.velocity[0] = -ball.velocity[0]
+
     if ball.rect.y > 490:
         ball.velocity[1] = -ball.velocity[1]
+
     if ball.rect.y < 0:
         ball.velocity[1] = -ball.velocity[1]
 
     if pygame.sprite.collide_mask(ball, paddleA) or pygame.sprite.collide_mask(ball, paddleB):
         ball.bounce()
-    if gameover == False:
-        screen.fill(constants.BLACK)
-        pygame.draw.line(screen, constants.WHITE, constants.line_start_pos, constants.line_end_pos, constants.line_width)
 
-        for entity in all_sprites:
-            screen.blit(entity.image, entity.rect)
 
-        text_1 = classes.Text(constants.WHITE, str(scoreA), 74, constants.CENTER)
-        screen.blit(text_1.text, (250, 10))
-        text_2 = classes.Text(constants.WHITE, str(scoreB), 74, constants.CENTER)
-        screen.blit(text_2.text, (420, 10))
-
-    else:
+    if gameover == True:
         screen.fill(constants.BLACK)
         gameover_screen = classes.Text(constants.WHITE, "Game Over!", 75, constants.CENTER)
         time.sleep(0.5)
@@ -99,6 +97,17 @@ while running:
             winner = classes.Text(constants.WHITE, "Player A wins!", 45, constants.CENTER)
             screen.blit(winner.text, winner.rect)
 
+    else:
+        screen.fill(constants.BLACK)
+        pygame.draw.line(screen, constants.WHITE, constants.line_start_pos, constants.line_end_pos, constants.line_width)
+
+        for entity in all_sprites:
+            screen.blit(entity.image, entity.rect)
+
+        text_1 = classes.Text(constants.WHITE, str(scoreA), 74, constants.CENTER)
+        screen.blit(text_1.text, (250, 10))
+        text_2 = classes.Text(constants.WHITE, str(scoreB), 74, constants.CENTER)
+        screen.blit(text_2.text, (420, 10))
 
     pygame.display.flip()
     clock.tick(60)
