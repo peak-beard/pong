@@ -50,3 +50,7 @@ class Text(pygame.sprite.Sprite):
         self.font = pygame.font.Font(None, fontsize)
         self.text = self.font.render(text, 1, color)
         self.rect = self.text.get_rect(center=pos)
+
+
+
+

@@ -59,24 +59,19 @@ while running:
 
     all_sprites.update()
 
-    if scoreA or scoreB >= 10:
-        gameover = False
-        print("gameover")
+    if scoreB >= 10:
+        gameover = True
+
+    if scoreA >= 10:
+        gameover = True
 
     if ball.rect.x >= 690:
         scoreA += 1
         ball.velocity[0] = -ball.velocity[0]
-        ball.rect.x = constants.ball_x
-        ball.rect.y = constants.ball_y
-
-        time.sleep(0.25)
 
     if ball.rect.x <= 0:
         scoreB += 1
         ball.velocity[0] = -ball.velocity[0]
-        ball.rect.x = constants.ball_x
-        ball.rect.y = constants.ball_y
-        time.sleep(0.25)
 
     if ball.rect.y > 490:
         ball.velocity[1] = -ball.velocity[1]
@@ -87,22 +82,25 @@ while running:
     if pygame.sprite.collide_mask(ball, paddleA) or pygame.sprite.collide_mask(ball, paddleB):
         ball.bounce()
 
-
-    if gameover == True:
+    if gameover:
         screen.fill(constants.BLACK)
-        gameover_screen = classes.Text(constants.WHITE, "Game Over!", 75, constants.CENTER)
+        gameover_screen = classes.Text(constants.WHITE,
+                                       "Game Over!", 75, (constants.HALF_WIDTH, constants.HALF_HEIGHT - 20))
         time.sleep(0.5)
         screen.blit(gameover_screen.text, gameover_screen.rect)
         if scoreB > scoreA:
-            winner = classes.Text(constants.WHITE, "Player B wins!", 45, constants.CENTER)
+            winner = classes.Text(constants.WHITE, "Player B wins", 45, (constants.HALF_WIDTH,
+                                                                         constants.HALF_HEIGHT + 30))
             screen.blit(winner.text, winner.rect)
         else:
-            winner = classes.Text(constants.WHITE, "Player A wins!", 45, constants.CENTER)
+            winner = classes.Text(constants.WHITE, "Player A wins", 45, (constants.HALF_WIDTH,
+                                                                         constants.HALF_HEIGHT + 30))
             screen.blit(winner.text, winner.rect)
 
     else:
         screen.fill(constants.BLACK)
-        pygame.draw.line(screen, constants.WHITE, constants.line_start_pos, constants.line_end_pos, constants.line_width)
+        pygame.draw.line(screen, constants.WHITE, constants.line_start_pos,
+                         constants.line_end_pos, constants.line_width)
 
         for entity in all_sprites:
             screen.blit(entity.image, entity.rect)
