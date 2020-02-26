@@ -65,7 +65,7 @@ while running:
     if scoreA >= 10:
         gameover = True
 
-    if ball.rect.x >= 690:
+    if ball.rect.x >= constants.SCREEN_WIDTH - 10:
         scoreA += 1
         ball.velocity[0] = -ball.velocity[0]
 
@@ -73,7 +73,7 @@ while running:
         scoreB += 1
         ball.velocity[0] = -ball.velocity[0]
 
-    if ball.rect.y > 490:
+    if ball.rect.y > constants.SCREEN_HEIGHT - 10:
         ball.velocity[1] = -ball.velocity[1]
 
     if ball.rect.y < 0:
@@ -96,7 +96,16 @@ while running:
             winner = classes.Text(constants.WHITE, "Player A wins", 45, (constants.HALF_WIDTH,
                                                                          constants.HALF_HEIGHT + 30))
             screen.blit(winner.text, winner.rect)
+        again = classes.Text(constants.WHITE, "Press (Space) to play again", 35,
+                                 (constants.HALF_WIDTH, constants.SCREEN_HEIGHT - 20))
+        screen.blit(again.text, again.rect)
 
+        if keys[pygame.K_SPACE]:
+            gameover = False
+            ball.rect.x = constants.HALF_WIDTH
+            ball.rect.y = constants.HALF_HEIGHT
+            scoreA = 0
+            scoreB = 0
     else:
         screen.fill(constants.BLACK)
         pygame.draw.line(screen, constants.WHITE, constants.line_start_pos,
@@ -106,9 +115,9 @@ while running:
             screen.blit(entity.image, entity.rect)
 
         text_1 = classes.Text(constants.WHITE, str(scoreA), 74, constants.CENTER)
-        screen.blit(text_1.text, (250, 10))
+        screen.blit(text_1.text, (constants.HALF_WIDTH + 50, 10))
         text_2 = classes.Text(constants.WHITE, str(scoreB), 74, constants.CENTER)
-        screen.blit(text_2.text, (420, 10))
+        screen.blit(text_2.text, (constants.HALF_WIDTH - 85, 10))
 
     pygame.display.flip()
     clock.tick(60)
